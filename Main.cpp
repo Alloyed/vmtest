@@ -1,9 +1,19 @@
-#include "Util/Log.hpp"
+#include <benchmark/benchmark.h>
 #include "Util/macros.hpp"
 
-int main(int argc, char* argv[]) {
-    UNUSED(argc);
-    UNUSED(argv);
-    Log::info("Hi");
-    return 0;
+static void BM_StringCreation(benchmark::State& state) {
+    for (auto _ : state)
+        std::string empty_string;
 }
+// Register the function as a benchmark
+BENCHMARK(BM_StringCreation);
+
+// Define another benchmark
+static void BM_StringCopy(benchmark::State& state) {
+    std::string x = "hello";
+    for (auto _ : state)
+        std::string copy(x);
+}
+BENCHMARK(BM_StringCopy);
+
+BENCHMARK_MAIN();

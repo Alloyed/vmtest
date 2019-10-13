@@ -9,6 +9,14 @@ set(CMAKE_BUILD_TYPE Debug)
 
 include(cotire)
 
+
+#add_subdirectory(deps/googletest)
+
+SET(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "X" FORCE)
+SET(BENCHMARK_ENABLE_INSTALL OFF CACHE BOOL "X" FORCE)
+SET(BENCHMARK_ENABLE_GTEST_TESTS OFF CACHE BOOL "X" FORCE)
+add_subdirectory(deps/benchmark)
+
 add_subdirectory(deps/fmt)
 
 add_executable(vmtest
@@ -25,8 +33,7 @@ target_include_directories(vmtest SYSTEM PRIVATE
 target_compile_definitions(vmtest PRIVATE)
 target_include_directories(vmtest PUBLIC ${vmtest_SOURCE_DIR})
 
-target_link_libraries(vmtest fmt::fmt)
-
+target_link_libraries(vmtest benchmark fmt::fmt)
 
 if(MSVC)
 	target_compile_options(vmtest PRIVATE /W4 /WX)
