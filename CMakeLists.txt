@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 set(CMAKE_BUILD_TYPE Debug)
 
+#set(CMAKE_DEBUG_TARGET_PROPERTIES INCLUDE_DIRECTORIES)
+
 enable_testing()
 
 #include(cotire)
@@ -36,19 +38,30 @@ set(TEST_ARGS --benchmark_format=json)
 add_executable(test-lua51
 	lua/benchmarks.cpp
 )
+target_compile_definitions(test-lua51 PRIVATE LUA_51=1)
 target_link_libraries(test-lua51 liblua51 benchmark_main)
-add_test(lua51 test-lua51 ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/lua51.json)
+add_test(NAME lua51
+	COMMAND test-lua51 ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/lua51.json
+	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/lua"
+)
 
 add_executable(test-lua53
 	lua/benchmarks.cpp
 )
+target_compile_definitions(test-lua53 PRIVATE LUA_53=1)
 target_link_libraries(test-lua53 liblua53 benchmark_main)
-add_test(lua53 test-lua53 ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/lua53.json)
+add_test(NAME lua53
+	COMMAND test-lua53 ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/lua53.json
+	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/lua"
+)
 
 add_executable(test-duktape
 	js/duktape-benchmarks.cpp
 )
 target_link_libraries(test-duktape libduktape benchmark_main)
-add_test(duktape test-duktape ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/duktape.json)
+add_test(NAME duktape
+	COMMAND test-duktape ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/duktape.json
+	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/js"
+)
 
 #cotire(vmtest)

@@ -1,4 +1,4 @@
-project(lua53 C)
+project(lua53)
 
 add_library(liblua53
 	src/lapi.c
