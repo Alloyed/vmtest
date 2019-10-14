@@ -1,8 +1,4 @@
-project(lua C)
-cmake_minimum_required(VERSION 2.8)
-
-include_directories(src ${CMAKE_CURRENT_BINARY_DIR})
-set(LUA53_INCLUDE src)
+project(lua53 C)
 
 add_library(liblua53
 	src/lapi.c
@@ -40,4 +36,7 @@ add_library(liblua53
 	src/lzio.c
 ) 
 
-set_target_properties(liblua53 PROPERTIES OUTPUT_NAME lua53)
+set_target_properties(liblua53 PROPERTIES
+	OUTPUT_NAME lua53
+	INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/src"
+)
