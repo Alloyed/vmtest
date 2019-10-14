@@ -17,6 +17,7 @@ enable_testing()
 add_subdirectory(deps/lua-5.1.5) # liblua51
 add_subdirectory(deps/lua-5.3.5) # liblua53
 add_subdirectory(deps/duktape-2.4.0) # libduktape
+include(wren)
 
 # other
 SET(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "X" FORCE)
@@ -62,6 +63,15 @@ target_link_libraries(test-duktape libduktape benchmark_main)
 add_test(NAME duktape
 	COMMAND test-duktape ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/duktape.json
 	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/js"
+)
+
+add_executable(test-wren
+	wren/benchmarks.cpp
+)
+target_link_libraries(test-wren wren benchmark_main)
+add_test(NAME wren
+	COMMAND test-wren ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/wren.json
+	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/wren"
 )
 
 #cotire(vmtest)
