@@ -112,6 +112,7 @@ local function offsetMomentum(b, nbody)
   b[1].vz = -pz / SOLAR_MASS
 end
 
+local arg = arg or {...}
 local N = arg[1] or 100
 local nbody = #all_bodies
 
