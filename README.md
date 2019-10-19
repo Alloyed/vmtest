@@ -27,7 +27,7 @@ Things I'm interested in evaluating:
 - [ ] v8
 - [x] PUC lua 5.1
 - [x] PUC lua 5.3
-- [ ] luajit
+- [x] luajit
 - [x] wren
 - [ ] dart
 - [ ] haxe

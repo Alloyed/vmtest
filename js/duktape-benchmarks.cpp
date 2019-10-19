@@ -2,6 +2,7 @@
 /* !!! REMINDER: stack starts at 0 !!! */
 
 #include "duktape.h"
+#include "duktape_console.h"
 
 static void BM_CreateVM(benchmark::State& state) {
     for (auto _ : state) {
@@ -48,12 +49,16 @@ BENCHMARK(BM_LoadNBody);
 
 static void BM_RunNBody(benchmark::State& state) {
 	duk_context* ctx = duk_create_heap_default();
+	duk_console_init(ctx, DUK_CONSOLE_PROXY_WRAPPER /*flags*/);
+
 	if (loadfile(ctx, "nbody.js") != 0) { // [0]
+		printf("loadfile failed\n");
 		state.SkipWithError(duk_safe_to_string(ctx, -1));
 		duk_pop(ctx);
 	}
 	else
 	{
+		// FIXME: the microbenchmark numbers on this are pretty sus
 		for (auto _ : state) {
 			duk_dup(ctx, 0); // [1] = nbody.js
 			duk_push_int(ctx, state.range(0)); // [2]

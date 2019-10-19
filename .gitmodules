@@ -10,3 +10,6 @@
 [submodule "deps/wren"]
 	path = deps/wren
 	url = https://github.com/wren-lang/wren.git
+[submodule "deps/luajit"]
+	path = deps/luajit
+	url = https://github.com/LuaJIT/LuaJIT.git

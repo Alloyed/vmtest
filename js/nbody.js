@@ -155,11 +155,11 @@ function energy() {
 
 offsetMomentum();
 
-//console.log(energy().toFixed(9));
-energy().toFixed(9);
+console.log(energy().toFixed(9));
+//energy().toFixed(9);
 for (var i = 0; i < N; i++) {
     advance(0.01);
 }
-//console.log(energy().toFixed(9));
-energy().toFixed(9);
+console.log(energy().toFixed(9));
+//energy().toFixed(9);
 })
