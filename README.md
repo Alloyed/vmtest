@@ -31,6 +31,8 @@ Things I'm interested in evaluating:
 - [x] wren
 - [ ] dart
 - [ ] haxe
+- [ ] squirrel
+- [ ] angelscript
 
 Running Tests
 -------------
