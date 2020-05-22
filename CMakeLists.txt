@@ -5,7 +5,7 @@ project(vmtest)
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${vmtest_SOURCE_DIR}/cmake")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
-set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
 #set(CMAKE_DEBUG_TARGET_PROPERTIES INCLUDE_DIRECTORIES)
 
@@ -19,6 +19,7 @@ add_subdirectory(deps/lua-5.3.5) # liblua53
 add_subdirectory(deps/duktape-2.4.0) # libduktape
 include(wren)
 include(luajit) # libluajit
+include(v8)
 
 # other
 SET(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "X" FORCE)
@@ -74,6 +75,15 @@ add_executable(test-duktape
 target_link_libraries(test-duktape libduktape benchmark_main)
 add_test(NAME duktape
 	COMMAND test-duktape ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/duktape.json
+	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/js"
+)
+
+add_executable(test-v8
+	js/v8-benchmarks.cpp
+)
+target_link_libraries(test-v8 libv8 benchmark) # custom main fn
+add_test(NAME v8
+	COMMAND test-v8 ${TEST_ARGS} --benchmark_out=${CMAKE_BINARY_DIR}/v8.json
 	WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/js"
 )
 

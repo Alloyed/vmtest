@@ -2,7 +2,7 @@
 /* !!! REMINDER: stack starts at 0 !!! */
 
 #include "duktape.h"
-#include "duktape_console.h"
+#include "duk_console.h"
 
 static void BM_CreateVM(benchmark::State& state) {
     for (auto _ : state) {
