@@ -58,7 +58,7 @@ tableIndex)` will set a key-value pair in the specified table, but the key
 _must_ be at top-1 and the value _must_ be at top, and both values will be
 removed after they are used. None of this is obvious from looking at the call
 itself, you need to refer to documentation to know that it's happening. By
-contrast, `wrenInsertInList(vm, listIndex, keyIndex, valueIndex)` tells you
+contrast, `wrenInsertInList(vm, listSlot, indexSlot, valueSlot)` tells you
 everything in advance, and doesn't implicitly manipulate anything.
 
 This makes writing generic helper methods a bit more tricky in wren, though.
