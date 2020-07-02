@@ -10,7 +10,7 @@ Ok, pulling back the curtain a bit; I don't think those things are actually
 dealbreakers, and I don't think they should be dealbreakers for your purposes,
 either. If I'm being totally honestly this whole list is kinda whingey in about
 the same way. With a few exceptions, none of this stuff is a dealbreaker for
-wren either, and none of them seem like fatal, unfixable flaws
+wren either, and none of them seem like fatal, unfixable flaws.
 
 ## handles
 
@@ -73,6 +73,7 @@ as necessary.
 ## No re-entrancy
 
 https://github.com/wren-lang/wren/issues/487
+
 What this means, in effect, is that you cannot call a wren function/method from
 inside a wren function. How does this restrict you? It means, for example, that
 you cannot write foreign methods that can treat functions as first class,
@@ -119,7 +120,7 @@ This one sort of scares me the most; the general attitude of wren seems to be
 that API validation/bounds checks should be opt-in, if they even exist at all.
 This to me seems to be counter to the point of using a scripting language in
 the first place; if I were ok with segfaulting and having to restart my
-application I could very easily just do that from C++ directly
+application I could very easily just do that from C++ directly.
 
 ## The Vec2/Vec3/Vec4 problem
 
